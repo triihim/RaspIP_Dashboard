@@ -108,7 +108,7 @@ function addNetwork(ssid, psk, priority, supplicantConfObj) {
     supplicantConfObj.networks[newKey] = {
         ssid: ssid.toString(),
         psk: psk.toString(),
-        key_mgmt: "WPA_PSK",
+        key_mgmt: "WPA-PSK",
         priority: priority
     }
 }
