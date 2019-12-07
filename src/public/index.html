@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RaspIP Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-light bg-light my-3">
+            <a class="navbar-brand" href="#">RaspIP Dashboard</a>
+            <ul class="navbar-nav mr-auto ml-5">
+                <li id="temp" class="nav-item"></li>
+            </ul>
+            <form class="form-inline">
+                <button id="reboot-btn" class="btn btn-secondary float-right mr-2" type="button">Reboot</button>
+                <button id="shutdown-btn" class="btn btn-secondary float-right" type="button">Shutdown</button>
+            </form>
+        </nav>
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <h5>Memory usage</h5>
+                <hr>
+                <table id="memusage" class="table table-hover">
+                </table>
+                <h5>SD card usage</h5>
+                <hr />
+                <table id="sdusage" class="table table-hover">
+                </table>
+                <hr />
+            </div>
+            <div class="col-12 col-lg-4">
+                <h5>Networks</h5>
+                <hr />
+                <form id="new-network">
+                    <div class="form-group">
+                        <input id="ssid_input" type="text" class="form-control" placeholder="SSID">
+                    </div>
+                    <div class="form-group">
+                        <input id="pwd_input" type="password" class="form-control" placeholder="Password">
+                    </div>
+			<div class="form-group">
+				<input id="prio_input" type="number" min="0" max="100" class="form-control" placeholder="Priority">
+			</div>
+                    <button id="add-network-btn" class="btn btn-primary btn-sm mb-3" type="button">Add new</button>
+                </form>
+                <h6>Known networks</h6>
+                <ul id="networks" class="list-group">
+
+                </ul>
+            </div>
+        </div>
+        <hr />
+    </div>
+</body>
+
+<script src="functions.js"></script>
+
+<script>
+
+    // Initial data fetches
+	updateTemperature();
+    updateMemUsage();
+	updateNetworks();
+	updateSdUsage();
+    
+    // Periodical data fetches.
+    setInterval(updateTemperature, 5000);
+	setInterval(updateMemUsage, 10000);
+	setInterval(updateSdUsage, 10000);
+
+    document.getElementById("add-network-btn").addEventListener("click", function() {
+        var ssid = document.getElementById("ssid_input").value;
+        var pwd = document.getElementById("pwd_input").value;
+	    var prio = document.getElementById("prio_input").value;
+
+        if(ssid.length > 1) {
+            var json = {
+                ssid: ssid,
+                pwd: pwd,
+                priority: prio
+            };
+
+            document.getElementById("ssid_input").value = "";
+            document.getElementById("pwd_input").value = "";
+            document.getElementById("prio_input").value = "";
+
+            ajaxJsonPost("addnetwork", JSON.stringify(json), function() {
+                updateNetworks();
+            });
+        }
+
+    });
+
+    document.getElementById("reboot-btn").addEventListener("click", function() {
+        var reboot = confirm("Reboot Raspberry?");
+        if(reboot) {
+            ajaxGet("reboot", function() {
+                console.log("Rebooted");
+            });
+        }
+        });
+
+    document.getElementById("shutdown-btn").addEventListener("click", function() {
+        var shutdown = confirm("Shutdown Raspberry?");
+        if(shutdown) {
+            ajaxGet("shutdown", function() {
+                console.log("Shutdown");
+            })
+        };
+    });
+
+</script>
+</html>
