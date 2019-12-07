@@ -11,3 +11,5 @@
     ```
     cd /path/to/RaspIP_Dashboard/src
     node app.js &
+
+- Default port for the dashboard is 3000
