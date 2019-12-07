@@ -1,5 +1,5 @@
 # RaspIP Dashboard
-### Extension above RaspIP [https://github.com/triihim/RaspIP]
+### Extension for RaspIP [https://github.com/triihim/RaspIP]
 
 ## Setup
 1. Clone this repository
