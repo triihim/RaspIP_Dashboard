@@ -1,6 +1,8 @@
 # RaspIP Dashboard
 ### Extension for [RaspIP](https://github.com/triihim/RaspIP])
 
+![Screenshot of RaspIP Dashboard](dashboard.PNG)
+
 ## Setup
 1. Clone this repository
 2. Run npm install in RaspIP_Dashboard folder
