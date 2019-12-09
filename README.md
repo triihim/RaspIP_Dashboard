@@ -1,5 +1,7 @@
 # RaspIP Dashboard
-### Extension above RaspIP [https://github.com/triihim/RaspIP]
+### Extension for [RaspIP](https://github.com/triihim/RaspIP])
+
+![Screenshot of RaspIP Dashboard](dashboard.PNG)
 
 ## Setup
 1. Clone this repository
@@ -10,4 +12,6 @@
 4. Add RaspIP_Dashboard to /etc/rc.local
     ```
     cd /path/to/RaspIP_Dashboard/src
-    node RaspIP_Dashboard_app.js &
+    node RaspIP_Dashboard_app.js 
+
+- Default port for the dashboard is 3000
