@@ -10,4 +10,4 @@
 4. Add RaspIP_Dashboard to /etc/rc.local
     ```
     cd /path/to/RaspIP_Dashboard/src
-    node app.js &
+    node RaspIP_Dashboard_app.js &

@@ -51,7 +51,12 @@ app.get("/shutdown", () => {
 app.get("/networks", (req, res) => {
 	supplicant.getSupplicantConfObj(supplicantFp).then(obj => {
 		var networks = obj.networks;
-		res.end(JSON.stringify(networks));
+		var cleaned = Object.keys(networks).map(nkey => {
+			var secureNetwork = networks[nkey];
+			delete secureNetwork["psk"];
+			return secureNetwork;
+		});
+		res.end(JSON.stringify(cleaned));
 	}).catch(err => {
 		res.end("0");
 	});

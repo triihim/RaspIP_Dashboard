@@ -36,13 +36,20 @@ function printNetworks(networksJsonString) {
 
     Object.keys(networks).forEach(nkey => {
         var ssid = networks[nkey].ssid;
-        var identifier = nkey;
+	var prio = networks[nkey].priority;
+	var identifier = nkey;
 
         var li = document.createElement("li");
         li.classList.add("list-group-item");
-        var span = document.createElement("span");
-        span.innerText = ssid;
-        li.appendChild(span);
+	var priospan = document.createElement("span");
+	priospan.classList.add("badge");
+	priospan.classList.add("badge-secondary");
+	priospan.classList.add("mr-2");
+	priospan.innerText = prio;
+	li.appendChild(priospan);
+        var ssidspan = document.createElement("span");
+        ssidspan.innerText = ssid;
+        li.appendChild(ssidspan);
     
         var button = document.createElement("button");
         button.classList.add("btn");
